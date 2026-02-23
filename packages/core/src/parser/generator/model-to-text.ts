@@ -209,12 +209,14 @@ function localizeAgg(name: string, lang: 'RU' | 'EN'): string {
 
 class GeneratorContext {
   private lang: 'RU' | 'EN';
+  private explicitLang: boolean;
   private indentStr: string;
   private upper: boolean;
   private keywords: Record<KW, string>;
   private depth: number = 0;
 
   constructor(options?: GenerateOptions) {
+    this.explicitLang = options?.language !== undefined;
     this.lang = options?.language ?? 'RU';
     this.indentStr = options?.indent ?? '  ';
     this.upper = options?.uppercase ?? true;
@@ -239,6 +241,11 @@ class GeneratorContext {
   // -----------------------------------------------------------------------
 
   generateModel(model: QueryModel): string {
+    // Respect the language stored in the model if no explicit language was given
+    if (model.meta?.language && !this.explicitLang && (model.meta.language === 'RU' || model.meta.language === 'EN')) {
+      this.lang = model.meta.language;
+      this.keywords = this.lang === 'EN' ? EN_KEYWORDS : RU_KEYWORDS;
+    }
     return model.queries.map(q => this.generateQueryItem(q)).join(';\n\n');
   }
 
@@ -452,6 +459,11 @@ class GeneratorContext {
   }
 
   private generateVirtualParam(p: VirtualParam): string {
+    // Virtual table params in 1C are positional (numeric names from parser)
+    // Only emit "name = value" for named params, just "value" for positional
+    if (/^\d+$/.test(p.name)) {
+      return this.generateExpr(p.value);
+    }
     return `${p.name} = ${this.generateExpr(p.value)}`;
   }
 
