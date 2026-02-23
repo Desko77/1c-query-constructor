@@ -1,0 +1,28 @@
+{
+  "name": "@1c-query/core",
+  "version": "0.1.0",
+  "description": "Query Core Library for 1C Query Constructor",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vitest": "^3.0.0",
+    "eslint": "^9.0.0",
+    "fast-check": "^4.0.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@1c-query/cli",
+  "version": "0.1.0",
+  "description": "CLI tool for 1C Query Constructor",
+  "type": "module",
+  "bin": {
+    "1c-query": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@1c-query/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.0.0"
+  }
+}

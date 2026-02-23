@@ -1,0 +1,29 @@
+{
+  "name": "@1c-query/vscode",
+  "version": "0.1.0",
+  "displayName": "1C Query Constructor",
+  "description": "Visual query builder for 1C:Enterprise",
+  "publisher": "1c-query",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Programming Languages", "Other"],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@1c-query/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.0.0",
+    "eslint": "^9.0.0"
+  }
+}

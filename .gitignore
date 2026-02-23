@@ -1,0 +1,12 @@
+node_modules/
+dist/
+out/
+*.vsix
+.vscode-test/
+coverage/
+.DS_Store
+*.tsbuildinfo
+.turbo/
+*.log
+.env
+.env.local
