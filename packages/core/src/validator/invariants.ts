@@ -6,9 +6,7 @@ import type {
   QueryModel,
   QueryItem,
   QueryBody,
-  Source,
   SelectItem,
-  UnionItem,
 } from '../model/query-model.js';
 import type { Diagnostic } from './diagnostic.js';
 
@@ -51,10 +49,6 @@ function defaults(opts?: ValidatorOptions): Required<ValidatorOptions> {
 
 function err(ctx: Ctx, code: string, message: string): void {
   ctx.diags.push({ severity: 'error', code, message });
-}
-
-function warn(ctx: Ctx, code: string, message: string): void {
-  ctx.diags.push({ severity: 'warn', code, message });
 }
 
 // ---------------------------------------------------------------------------

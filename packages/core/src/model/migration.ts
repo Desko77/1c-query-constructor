@@ -16,7 +16,7 @@ export function migrate(model: unknown): QueryModel {
 
   const version = (model as Record<string, unknown>).version;
   if (version === CURRENT_VERSION) {
-    return model as QueryModel;
+    return model as unknown as QueryModel;
   }
 
   // Future: add sequential migrations for older versions

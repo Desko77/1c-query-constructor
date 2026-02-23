@@ -3,11 +3,9 @@
 import type {
   QueryModel,
   QueryBody,
-  QueryItem,
   Expr,
   BoolExpr,
   ParameterSpec,
-  SelectItem,
   Source,
 } from './query-model.js';
 
@@ -15,7 +13,7 @@ import type {
  * Deep clone a QueryModel (structuredClone wrapper for convenience).
  */
 export function cloneModel(model: QueryModel): QueryModel {
-  return structuredClone(model);
+  return JSON.parse(JSON.stringify(model));
 }
 
 /**
