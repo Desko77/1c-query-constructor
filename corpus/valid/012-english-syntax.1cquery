@@ -1,0 +1,11 @@
+SELECT DISTINCT
+  Products.Ref AS Product,
+  Products.Description AS Name,
+  ISNULL(Products.Article, "") AS Article
+FROM
+  Catalog.Products AS Products
+WHERE
+  Products.DeletionMark = FALSE
+  AND Products.Description LIKE &SearchPattern
+ORDER BY
+  Products.Description ASC

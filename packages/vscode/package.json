@@ -1,0 +1,105 @@
+{
+  "name": "@1c-query/vscode",
+  "version": "0.1.0",
+  "displayName": "1C Query Constructor",
+  "description": "Visual query builder for 1C:Enterprise",
+  "publisher": "1c-query",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Programming Languages", "Other"],
+  "activationEvents": [
+    "onLanguage:1cquery",
+    "onCommand:1c-query.openConstructor"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "1c-query.openConstructor",
+        "title": "Open Query Constructor",
+        "category": "1C Query"
+      },
+      {
+        "command": "1c-query.parseQuery",
+        "title": "Parse Query to JSON",
+        "category": "1C Query"
+      },
+      {
+        "command": "1c-query.formatQuery",
+        "title": "Format Query",
+        "category": "1C Query"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "1c-query.queryConstructor",
+        "displayName": "1C Query Constructor",
+        "selector": [
+          { "filenamePattern": "*.1cquery" }
+        ],
+        "priority": "default"
+      }
+    ],
+    "languages": [
+      {
+        "id": "1cquery",
+        "aliases": ["1C Query", "1cquery"],
+        "extensions": [".1cquery"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "configuration": {
+      "title": "1C Query Constructor",
+      "properties": {
+        "1c-query.preserveFormatting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Preserve original formatting when round-tripping"
+        },
+        "1c-query.formattingMode": {
+          "type": "string",
+          "enum": ["preserve", "canonical"],
+          "default": "preserve",
+          "description": "Formatting mode for generated queries"
+        },
+        "1c-query.syncDebounceMs": {
+          "type": "number",
+          "default": 300,
+          "description": "Debounce interval (ms) for editor ↔ webview sync"
+        },
+        "1c-query.undoStackSize": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum undo stack size"
+        },
+        "1c-query.smartJoins.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Smart Join suggestions"
+        },
+        "1c-query.smartJoins.minScore": {
+          "type": "number",
+          "default": 50,
+          "description": "Minimum confidence score for Smart Join suggestions"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@1c-query/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.0.0",
+    "eslint": "^9.0.0"
+  }
+}
